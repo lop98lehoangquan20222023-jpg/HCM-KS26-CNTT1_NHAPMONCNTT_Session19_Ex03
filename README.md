@@ -1,21 +1,30 @@
-# Phần 1:Báo cáo phân tích:
-- Input(dấu hiệu):
-1. Các tài khoản cá nhân liên tục gửi cảnh báo đăng nhập bất thường.
-2. Nhận được cảnh báo bảo mật,phiên đăng nhập lạ hoặc yêu cầu mã xác thực OTP không rõ nguồn gốc.
-- Process:
-1. Ngắt kết nối wifi ngay lập tức để ngăn mã độc tiếp tục xâm nhập vào máy.
-2. Dùng thiết bị chưa bị mã độc xâm nhập thu hồi các quyền và đăng xuất ra khỏi các thiết bị khác.
-3. Thay đổi mật khẩu các tài khoản sau khi thu hồi quyền.
-4. Làm sạch và cài lại hệ điều hành:quét các mã độc bằng các phần mềm diệt viruss sau đó tiến hành cài lại hệ điều hành nếu các phần cứng quan trọng hay các phần mềm gặp tổn hại.
-- Output:
-1. Ngắt toàn bộ kết nối với mã độc với tài khoản cá nhân.
-2. Thay đổi các mật khẩu cá nhân quan trọng.
-3. Máy tính được làm sạch có thể sử dụng lại được bình thường.
-# Phần 2:Hướng dẫn triển khai nhanh
-## 1.Thay đổi mật khẩu bằng thiết bị khác:
-1. Đăng nhập vào tài khoản cần thay đổi mật khẩu:
-2. Tiến hành đổi mật khẩu.
-3. Sau khi thay đổi mật khẩu chọn vào đăng xuất khỏi các thiết bị khác.
-## 2. Cách thu hồi token trên Github
-1. Thu hồi Personal Access Tokens: Vào Settings -> Developer settings -> Personal access tokens -> Chọn token cũ và bấm Delete/Revoke.
-2. Thu hồi OAuth Apps: Vào Settings -> Applications -> Authorized OAuth Apps -> Chọn ứng dụng lạ và bấm Revoke access.
+# PHẦN 1: BÁO CÁO PHÂN TÍCH KIẾN TRÚC AN NINH
+1. Rủi ro khi lưu mật khẩu trên Chrome (Login Data):
+
+- Mật khẩu bị lưu ở dạng mã hóa yếu.
+
+- Khi dính mã độc Infostealer, hacker dễ dàng lấy file dữ liệu này và giải mã ngay lập tức trên máy của bạn mà không cần biết mật khẩu tổng, đồng thời đánh cắp luôn phiên đăng nhập để vượt qua 2FA.
+
+2. Kiến trúc Zero-Knowledge & Client-side Decryption:
+
+- Dữ liệu được mã hóa hoàn toàn bằng AES-256 ngay trên thiết bị của bạn (Client) trước khi gửi lên đám mây.
+
+- Nếu máy chủ Bitwarden bị hack? Hacker không thể giải mã dữ liệu vì máy chủ hoàn toàn không giữ khóa hay mật khẩu tổng (Zero-Knowledge).
+
+# PHẦN 2: THIẾT KẾ CHÍNH SÁCH & KỊCH BẢN CHUYỂN ĐỔI
+3. Tạo Master Passphrase đạt chuẩn:
+
+Nguyên tắc: Dài tối thiểu 20 ký tự, kết hợp từ ngẫu nhiên, số và ký tự đặc biệt để chống tấn công vét cạn.
+
+Ví dụ: Tieu-Hổ-Bay-Giữa-Mây-99!$2026
+
+4. Cấu hình Generator trong Bitwarden cho 40 tài khoản:
+
+Loại: Password | Độ dài: 24 - 32 ký tự
+
+Tích chọn đầy đủ: Chữ hoa (A-Z), Chữ thường (a-z), Số (0-9), và Ký tự đặc biệt (!@#$).
+
+5. Auto-fill chống Phishing tốt hơn con người:
+
+Bitwarden chỉ tự động điền khi tên miền khớp chính xác 100% với dữ liệu đã lưu. Các trang web lừa đảo giả mạo tên miền (ví dụ: githúb.com) sẽ bị từ chối điền, giúp cảnh báo người dùng ngay lập tức.
+
