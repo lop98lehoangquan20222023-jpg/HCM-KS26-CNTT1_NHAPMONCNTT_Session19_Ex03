@@ -16,7 +16,6 @@
 
 Nguyên tắc: Dài tối thiểu 20 ký tự, kết hợp từ ngẫu nhiên, số và ký tự đặc biệt để chống tấn công vét cạn.
 
-Ví dụ: Tieu-Hổ-Bay-Giữa-Mây-99!$2026
 
 4. Cấu hình Generator trong Bitwarden cho 40 tài khoản:
 
